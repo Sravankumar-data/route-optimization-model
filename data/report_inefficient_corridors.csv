@@ -1,0 +1,11 @@
+road_id,road_type,zone_type,num_lanes,num_signals,total_trips,avg_dist_km,avg_time_min,avg_speed_kmph,benchmark_speed_kmph,speed_loss_pct
+RD00423,highway,industrial,5,3,131,5.58,36.14,8.77,63.13,86.1
+RD00067,highway,commercial,5,1,117,8.76,46.78,9.59,63.13,84.8
+RD00007,highway,commercial,3,1,138,13.69,68.17,9.58,63.13,84.8
+RD00235,highway,industrial,5,2,128,18.96,89.2,9.76,63.13,84.5
+RD00238,highway,commercial,4,2,127,12.6,55.92,9.78,63.13,84.5
+RD00091,highway,industrial,4,3,159,5.03,29.27,9.86,63.13,84.4
+RD00183,highway,industrial,2,3,128,11.2,54.61,10.04,63.13,84.1
+RD00494,highway,industrial,2,2,143,8.63,47.45,10.07,63.13,84.0
+RD00419,highway,industrial,5,0,134,5.43,32.19,10.13,63.13,84.0
+RD00153,highway,industrial,4,2,141,8.01,40.21,10.29,63.13,83.7

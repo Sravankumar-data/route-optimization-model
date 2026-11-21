@@ -1,0 +1,9 @@
+﻿venv/
+__pycache__/
+*.pkl
+data/*.duckdb
+data/*.duckdb.wal
+data/roads.csv
+data/traffic.csv
+data/trips.csv
+data/weather.csv

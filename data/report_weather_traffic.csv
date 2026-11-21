@@ -1,0 +1,11 @@
+weather_type,traffic_level,trip_count,avg_speed_kmph,min_per_km
+fog,high,14417,9.68,8.27
+rain,high,197663,13.09,6.42
+fog,medium,18904,14.54,5.89
+fog,hgh,1068,14.82,5.69
+clear,high,58857,15.7,5.55
+fog,low,19220,18.05,5.0
+fog,lw,1456,18.43,4.92
+rain,medium,254645,19.33,4.73
+rain,hgh,15242,19.45,4.73
+clear,medium,76135,22.74,4.23
