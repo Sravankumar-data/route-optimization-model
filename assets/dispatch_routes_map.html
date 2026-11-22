@@ -1,0 +1,1248 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_90a36b18854e969b2ed81ef727b9a1f2 {
+                    position: relative;
+                    width: 100.0vw;
+                    height: 100.0vh;
+
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+
+            <style>html, body {
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
+            </style>
+
+            <style>/*
+ * Glyphicons Halflings -- the icon font used by folium's default Awesome Markers
+ * (Icon(prefix="glyphicon")). Extracted from Bootstrap 3's glyphicon rules only.
+ *
+ * folium previously loaded netdna's bootstrap-glyphicons.css, which despite its
+ * name ships a full Bootstrap-3 base stylesheet (normalize reset + global `body`
+ * rules) that leaked onto the host page (GH-1820). This file provides just the
+ * @font-face and .glyphicon/.glyphicon-* rules needed for the markers, with no
+ * page-wide side effects. Font files are served from jsDelivr.
+ */
+@font-face{font-family:'Glyphicons Halflings';src:url('https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/fonts/glyphicons-halflings-regular.eot');src:url('https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/fonts/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'),url('https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/fonts/glyphicons-halflings-regular.woff') format('woff'),url('https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/fonts/glyphicons-halflings-regular.ttf') format('truetype'),url('https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/fonts/glyphicons-halflings-regular.svg#glyphicons-halflingsregular') format('svg');}.glyphicon{position:relative;top:1px;display:inline-block;font-family:'Glyphicons Halflings';font-style:normal;font-weight:normal;line-height:1;-webkit-font-smoothing:antialiased;}
+.glyphicon-asterisk:before{content:"\2a";}
+.glyphicon-plus:before{content:"\2b";}
+.glyphicon-euro:before{content:"\20ac";}
+.glyphicon-minus:before{content:"\2212";}
+.glyphicon-cloud:before{content:"\2601";}
+.glyphicon-envelope:before{content:"\2709";}
+.glyphicon-pencil:before{content:"\270f";}
+.glyphicon-glass:before{content:"\e001";}
+.glyphicon-music:before{content:"\e002";}
+.glyphicon-search:before{content:"\e003";}
+.glyphicon-heart:before{content:"\e005";}
+.glyphicon-star:before{content:"\e006";}
+.glyphicon-star-empty:before{content:"\e007";}
+.glyphicon-user:before{content:"\e008";}
+.glyphicon-film:before{content:"\e009";}
+.glyphicon-th-large:before{content:"\e010";}
+.glyphicon-th:before{content:"\e011";}
+.glyphicon-th-list:before{content:"\e012";}
+.glyphicon-ok:before{content:"\e013";}
+.glyphicon-remove:before{content:"\e014";}
+.glyphicon-zoom-in:before{content:"\e015";}
+.glyphicon-zoom-out:before{content:"\e016";}
+.glyphicon-off:before{content:"\e017";}
+.glyphicon-signal:before{content:"\e018";}
+.glyphicon-cog:before{content:"\e019";}
+.glyphicon-trash:before{content:"\e020";}
+.glyphicon-home:before{content:"\e021";}
+.glyphicon-file:before{content:"\e022";}
+.glyphicon-time:before{content:"\e023";}
+.glyphicon-road:before{content:"\e024";}
+.glyphicon-download-alt:before{content:"\e025";}
+.glyphicon-download:before{content:"\e026";}
+.glyphicon-upload:before{content:"\e027";}
+.glyphicon-inbox:before{content:"\e028";}
+.glyphicon-play-circle:before{content:"\e029";}
+.glyphicon-repeat:before{content:"\e030";}
+.glyphicon-refresh:before{content:"\e031";}
+.glyphicon-list-alt:before{content:"\e032";}
+.glyphicon-flag:before{content:"\e034";}
+.glyphicon-headphones:before{content:"\e035";}
+.glyphicon-volume-off:before{content:"\e036";}
+.glyphicon-volume-down:before{content:"\e037";}
+.glyphicon-volume-up:before{content:"\e038";}
+.glyphicon-qrcode:before{content:"\e039";}
+.glyphicon-barcode:before{content:"\e040";}
+.glyphicon-tag:before{content:"\e041";}
+.glyphicon-tags:before{content:"\e042";}
+.glyphicon-book:before{content:"\e043";}
+.glyphicon-print:before{content:"\e045";}
+.glyphicon-font:before{content:"\e047";}
+.glyphicon-bold:before{content:"\e048";}
+.glyphicon-italic:before{content:"\e049";}
+.glyphicon-text-height:before{content:"\e050";}
+.glyphicon-text-width:before{content:"\e051";}
+.glyphicon-align-left:before{content:"\e052";}
+.glyphicon-align-center:before{content:"\e053";}
+.glyphicon-align-right:before{content:"\e054";}
+.glyphicon-align-justify:before{content:"\e055";}
+.glyphicon-list:before{content:"\e056";}
+.glyphicon-indent-left:before{content:"\e057";}
+.glyphicon-indent-right:before{content:"\e058";}
+.glyphicon-facetime-video:before{content:"\e059";}
+.glyphicon-picture:before{content:"\e060";}
+.glyphicon-map-marker:before{content:"\e062";}
+.glyphicon-adjust:before{content:"\e063";}
+.glyphicon-tint:before{content:"\e064";}
+.glyphicon-edit:before{content:"\e065";}
+.glyphicon-share:before{content:"\e066";}
+.glyphicon-check:before{content:"\e067";}
+.glyphicon-move:before{content:"\e068";}
+.glyphicon-step-backward:before{content:"\e069";}
+.glyphicon-fast-backward:before{content:"\e070";}
+.glyphicon-backward:before{content:"\e071";}
+.glyphicon-play:before{content:"\e072";}
+.glyphicon-pause:before{content:"\e073";}
+.glyphicon-stop:before{content:"\e074";}
+.glyphicon-forward:before{content:"\e075";}
+.glyphicon-fast-forward:before{content:"\e076";}
+.glyphicon-step-forward:before{content:"\e077";}
+.glyphicon-eject:before{content:"\e078";}
+.glyphicon-chevron-left:before{content:"\e079";}
+.glyphicon-chevron-right:before{content:"\e080";}
+.glyphicon-plus-sign:before{content:"\e081";}
+.glyphicon-minus-sign:before{content:"\e082";}
+.glyphicon-remove-sign:before{content:"\e083";}
+.glyphicon-ok-sign:before{content:"\e084";}
+.glyphicon-question-sign:before{content:"\e085";}
+.glyphicon-info-sign:before{content:"\e086";}
+.glyphicon-screenshot:before{content:"\e087";}
+.glyphicon-remove-circle:before{content:"\e088";}
+.glyphicon-ok-circle:before{content:"\e089";}
+.glyphicon-ban-circle:before{content:"\e090";}
+.glyphicon-arrow-left:before{content:"\e091";}
+.glyphicon-arrow-right:before{content:"\e092";}
+.glyphicon-arrow-up:before{content:"\e093";}
+.glyphicon-arrow-down:before{content:"\e094";}
+.glyphicon-share-alt:before{content:"\e095";}
+.glyphicon-resize-full:before{content:"\e096";}
+.glyphicon-resize-small:before{content:"\e097";}
+.glyphicon-exclamation-sign:before{content:"\e101";}
+.glyphicon-gift:before{content:"\e102";}
+.glyphicon-leaf:before{content:"\e103";}
+.glyphicon-eye-open:before{content:"\e105";}
+.glyphicon-eye-close:before{content:"\e106";}
+.glyphicon-warning-sign:before{content:"\e107";}
+.glyphicon-plane:before{content:"\e108";}
+.glyphicon-random:before{content:"\e110";}
+.glyphicon-comment:before{content:"\e111";}
+.glyphicon-magnet:before{content:"\e112";}
+.glyphicon-chevron-up:before{content:"\e113";}
+.glyphicon-chevron-down:before{content:"\e114";}
+.glyphicon-retweet:before{content:"\e115";}
+.glyphicon-shopping-cart:before{content:"\e116";}
+.glyphicon-folder-close:before{content:"\e117";}
+.glyphicon-folder-open:before{content:"\e118";}
+.glyphicon-resize-vertical:before{content:"\e119";}
+.glyphicon-resize-horizontal:before{content:"\e120";}
+.glyphicon-hdd:before{content:"\e121";}
+.glyphicon-bullhorn:before{content:"\e122";}
+.glyphicon-certificate:before{content:"\e124";}
+.glyphicon-thumbs-up:before{content:"\e125";}
+.glyphicon-thumbs-down:before{content:"\e126";}
+.glyphicon-hand-right:before{content:"\e127";}
+.glyphicon-hand-left:before{content:"\e128";}
+.glyphicon-hand-up:before{content:"\e129";}
+.glyphicon-hand-down:before{content:"\e130";}
+.glyphicon-circle-arrow-right:before{content:"\e131";}
+.glyphicon-circle-arrow-left:before{content:"\e132";}
+.glyphicon-circle-arrow-up:before{content:"\e133";}
+.glyphicon-circle-arrow-down:before{content:"\e134";}
+.glyphicon-globe:before{content:"\e135";}
+.glyphicon-tasks:before{content:"\e137";}
+.glyphicon-filter:before{content:"\e138";}
+.glyphicon-fullscreen:before{content:"\e140";}
+.glyphicon-dashboard:before{content:"\e141";}
+.glyphicon-heart-empty:before{content:"\e143";}
+.glyphicon-link:before{content:"\e144";}
+.glyphicon-phone:before{content:"\e145";}
+.glyphicon-usd:before{content:"\e148";}
+.glyphicon-gbp:before{content:"\e149";}
+.glyphicon-sort:before{content:"\e150";}
+.glyphicon-sort-by-alphabet:before{content:"\e151";}
+.glyphicon-sort-by-alphabet-alt:before{content:"\e152";}
+.glyphicon-sort-by-order:before{content:"\e153";}
+.glyphicon-sort-by-order-alt:before{content:"\e154";}
+.glyphicon-sort-by-attributes:before{content:"\e155";}
+.glyphicon-sort-by-attributes-alt:before{content:"\e156";}
+.glyphicon-unchecked:before{content:"\e157";}
+.glyphicon-expand:before{content:"\e158";}
+.glyphicon-collapse-down:before{content:"\e159";}
+.glyphicon-collapse-up:before{content:"\e160";}
+.glyphicon-log-in:before{content:"\e161";}
+.glyphicon-flash:before{content:"\e162";}
+.glyphicon-log-out:before{content:"\e163";}
+.glyphicon-new-window:before{content:"\e164";}
+.glyphicon-record:before{content:"\e165";}
+.glyphicon-save:before{content:"\e166";}
+.glyphicon-open:before{content:"\e167";}
+.glyphicon-saved:before{content:"\e168";}
+.glyphicon-import:before{content:"\e169";}
+.glyphicon-export:before{content:"\e170";}
+.glyphicon-send:before{content:"\e171";}
+.glyphicon-floppy-disk:before{content:"\e172";}
+.glyphicon-floppy-saved:before{content:"\e173";}
+.glyphicon-floppy-remove:before{content:"\e174";}
+.glyphicon-floppy-save:before{content:"\e175";}
+.glyphicon-floppy-open:before{content:"\e176";}
+.glyphicon-credit-card:before{content:"\e177";}
+.glyphicon-transfer:before{content:"\e178";}
+.glyphicon-cutlery:before{content:"\e179";}
+.glyphicon-header:before{content:"\e180";}
+.glyphicon-compressed:before{content:"\e181";}
+.glyphicon-earphone:before{content:"\e182";}
+.glyphicon-phone-alt:before{content:"\e183";}
+.glyphicon-tower:before{content:"\e184";}
+.glyphicon-stats:before{content:"\e185";}
+.glyphicon-sd-video:before{content:"\e186";}
+.glyphicon-hd-video:before{content:"\e187";}
+.glyphicon-subtitles:before{content:"\e188";}
+.glyphicon-sound-stereo:before{content:"\e189";}
+.glyphicon-sound-dolby:before{content:"\e190";}
+.glyphicon-sound-5-1:before{content:"\e191";}
+.glyphicon-sound-6-1:before{content:"\e192";}
+.glyphicon-sound-7-1:before{content:"\e193";}
+.glyphicon-copyright-mark:before{content:"\e194";}
+.glyphicon-registration-mark:before{content:"\e195";}
+.glyphicon-cloud-download:before{content:"\e197";}
+.glyphicon-cloud-upload:before{content:"\e198";}
+.glyphicon-tree-conifer:before{content:"\e199";}
+.glyphicon-tree-deciduous:before{content:"\e200";}
+.glyphicon-briefcase:before{content:"\1f4bc";}
+.glyphicon-calendar:before{content:"\1f4c5";}
+.glyphicon-pushpin:before{content:"\1f4cc";}
+.glyphicon-paperclip:before{content:"\1f4ce";}
+.glyphicon-camera:before{content:"\1f4f7";}
+.glyphicon-lock:before{content:"\1f512";}
+.glyphicon-bell:before{content:"\1f514";}
+.glyphicon-bookmark:before{content:"\1f516";}
+.glyphicon-fire:before{content:"\1f525";}
+.glyphicon-wrench:before{content:"\1f527";}
+</style>
+
+            <script>
+                L_NO_TOUCH = false;
+                L_DISABLE_3D = false;
+            </script>
+
+        
+    
+            
+        
+</head>
+<body>
+    
+    
+<div style="position: fixed; bottom: 30px; left: 30px; width: 230px; z-index:9999;
+            background-color: white; border: 2px solid #cbd5e1; border-radius: 8px;
+            padding: 12px; font-family: Arial, sans-serif; font-size: 13px; box-shadow: 0 2px 6px rgba(0,0,0,0.15);">
+  <b>Optimized Fleet Routes (VRP)</b><br><br>
+  <span style="color: black;">&#9632;</span> <b>Depot</b> (Start / Return)<br>
+  <span style="color: #2563EB;">&#9679;</span> <b>Truck 1</b> (10 stops | 412.5 min)<br>
+  <span style="color: #16A34A;">&#9679;</span> <b>Truck 2</b> (5 stops | 300.9 min)<br>
+  <span style="color: #DC2626;">&#9679;</span> <b>Truck 3</b> (10 stops | 471.3 min)
+</div>
+    
+            <div class="folium-map" id="map_90a36b18854e969b2ed81ef727b9a1f2" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_90a36b18854e969b2ed81ef727b9a1f2 = L.map(
+                "map_90a36b18854e969b2ed81ef727b9a1f2",
+                {
+                    center: [28.876145, 77.116253],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  "zoom": 11,
+  "zoomControl": true,
+  "preferCanvas": false,
+}
+
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_772e734d822fae338fcdb47251a18dc2 = L.tileLayer(
+                "https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}",
+                {
+  "minZoom": 0,
+  "maxZoom": 18,
+  "maxNativeZoom": 18,
+  "noWrap": false,
+  "attribution": "Esri",
+  "subdomains": "abc",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_772e734d822fae338fcdb47251a18dc2.addTo(map_90a36b18854e969b2ed81ef727b9a1f2);
+        
+    
+            var marker_e7899966756eec20a457b6fb66a394d2 = L.marker(
+                [28.876145, 77.116253],
+                {
+}
+            ).addTo(map_90a36b18854e969b2ed81ef727b9a1f2);
+        
+    
+            var icon_2482b29dc1f2fce1840eb2e78506a6cc = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "black",
+  "iconColor": "white",
+  "icon": "home",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_48df0d13c17d10f943edd5a5af10c225 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_2773804bb541bce12cc767c127ecd274 = $(`<div id="html_2773804bb541bce12cc767c127ecd274" style="width: 100.0%; height: 100.0%;"><b>Central Dispatch Depot (Node 0)</b></div>`)[0];
+                popup_48df0d13c17d10f943edd5a5af10c225.setContent(html_2773804bb541bce12cc767c127ecd274);
+            
+        
+
+        marker_e7899966756eec20a457b6fb66a394d2.bindPopup(popup_48df0d13c17d10f943edd5a5af10c225)
+        ;
+
+        
+    
+    
+            marker_e7899966756eec20a457b6fb66a394d2.bindTooltip(
+                `<div>
+                     Depot (Start / End)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                {
+                    const element = marker_e7899966756eec20a457b6fb66a394d2.getElement();
+                    if (element) {
+                        element.style.width = "";
+                        element.style.height = "";
+                        element.style.marginLeft = "";
+                        element.style.marginTop = "";
+                    }
+                }
+                marker_e7899966756eec20a457b6fb66a394d2.setIcon(icon_2482b29dc1f2fce1840eb2e78506a6cc);
+            
+    
+            var circle_marker_8d08cc97dff04b67df32af3d61c00661 = L.circleMarker(
+                [28.809582, 77.135108],
+                {"bubblingMouseEvents": true, "color": "#2563EB", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#2563EB", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7, "stroke": true, "weight": 3}
+            ).addTo(map_90a36b18854e969b2ed81ef727b9a1f2);
+        
+    
+        var popup_7d31da60e7f193f23f19d01bbf37c85a = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_ceda2201ed38be217c3862dcbe27a2bb = $(`<div id="html_ceda2201ed38be217c3862dcbe27a2bb" style="width: 100.0%; height: 100.0%;"><b>Truck_1 - Stop #1 (Node 4)</b><br>Road: highway (commercial)<br>Traffic: high | Weather: fog</div>`)[0];
+                popup_7d31da60e7f193f23f19d01bbf37c85a.setContent(html_ceda2201ed38be217c3862dcbe27a2bb);
+            
+        
+
+        circle_marker_8d08cc97dff04b67df32af3d61c00661.bindPopup(popup_7d31da60e7f193f23f19d01bbf37c85a)
+        ;
+
+        
+    
+    
+            circle_marker_8d08cc97dff04b67df32af3d61c00661.bindTooltip(
+                `<div>
+                     Truck_1 | Stop #1 (Node 4)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_db217dcab92482923078d90bb1561a79 = L.circleMarker(
+                [28.636844, 77.108653],
+                {"bubblingMouseEvents": true, "color": "#2563EB", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#2563EB", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7, "stroke": true, "weight": 3}
+            ).addTo(map_90a36b18854e969b2ed81ef727b9a1f2);
+        
+    
+        var popup_8e4cbefbe4a289b64617e05eeb9f056e = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_2a82f1655b743bb9d53f3c496fb1a3cd = $(`<div id="html_2a82f1655b743bb9d53f3c496fb1a3cd" style="width: 100.0%; height: 100.0%;"><b>Truck_1 - Stop #2 (Node 20)</b><br>Road: highway (unknown)<br>Traffic: low | Weather: clear</div>`)[0];
+                popup_8e4cbefbe4a289b64617e05eeb9f056e.setContent(html_2a82f1655b743bb9d53f3c496fb1a3cd);
+            
+        
+
+        circle_marker_db217dcab92482923078d90bb1561a79.bindPopup(popup_8e4cbefbe4a289b64617e05eeb9f056e)
+        ;
+
+        
+    
+    
+            circle_marker_db217dcab92482923078d90bb1561a79.bindTooltip(
+                `<div>
+                     Truck_1 | Stop #2 (Node 20)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_db1d3001840925fabea35fcec3cc2597 = L.circleMarker(
+                [28.500607, 77.038209],
+                {"bubblingMouseEvents": true, "color": "#2563EB", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#2563EB", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7, "stroke": true, "weight": 3}
+            ).addTo(map_90a36b18854e969b2ed81ef727b9a1f2);
+        
+    
+        var popup_4097a11a244d2e266ea1857fa449952c = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_7a9050c2f457ef4caa1953e5b2c31018 = $(`<div id="html_7a9050c2f457ef4caa1953e5b2c31018" style="width: 100.0%; height: 100.0%;"><b>Truck_1 - Stop #3 (Node 19)</b><br>Road: highway (commercial)<br>Traffic: low | Weather: rain</div>`)[0];
+                popup_4097a11a244d2e266ea1857fa449952c.setContent(html_7a9050c2f457ef4caa1953e5b2c31018);
+            
+        
+
+        circle_marker_db1d3001840925fabea35fcec3cc2597.bindPopup(popup_4097a11a244d2e266ea1857fa449952c)
+        ;
+
+        
+    
+    
+            circle_marker_db1d3001840925fabea35fcec3cc2597.bindTooltip(
+                `<div>
+                     Truck_1 | Stop #3 (Node 19)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_747996596261bf65e8b6d43e2e6e57e6 = L.circleMarker(
+                [28.449762, 77.115605],
+                {"bubblingMouseEvents": true, "color": "#2563EB", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#2563EB", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7, "stroke": true, "weight": 3}
+            ).addTo(map_90a36b18854e969b2ed81ef727b9a1f2);
+        
+    
+        var popup_dfca4cff5e71a685e2db3e69c235c2f0 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_c50d61401ce438cfbc9fb04b6e68abc5 = $(`<div id="html_c50d61401ce438cfbc9fb04b6e68abc5" style="width: 100.0%; height: 100.0%;"><b>Truck_1 - Stop #4 (Node 10)</b><br>Road: urban (commercial)<br>Traffic: low | Weather: clear</div>`)[0];
+                popup_dfca4cff5e71a685e2db3e69c235c2f0.setContent(html_c50d61401ce438cfbc9fb04b6e68abc5);
+            
+        
+
+        circle_marker_747996596261bf65e8b6d43e2e6e57e6.bindPopup(popup_dfca4cff5e71a685e2db3e69c235c2f0)
+        ;
+
+        
+    
+    
+            circle_marker_747996596261bf65e8b6d43e2e6e57e6.bindTooltip(
+                `<div>
+                     Truck_1 | Stop #4 (Node 10)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_0ea6e05e3f906d081a7c7a2f4a7ed57a = L.circleMarker(
+                [28.476852, 77.102861],
+                {"bubblingMouseEvents": true, "color": "#2563EB", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#2563EB", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7, "stroke": true, "weight": 3}
+            ).addTo(map_90a36b18854e969b2ed81ef727b9a1f2);
+        
+    
+        var popup_8a36f7aa73fb4a5420b796291fb0f85f = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_0daf2705cb5c8d016004b85b22da4076 = $(`<div id="html_0daf2705cb5c8d016004b85b22da4076" style="width: 100.0%; height: 100.0%;"><b>Truck_1 - Stop #5 (Node 23)</b><br>Road: residential (residential)<br>Traffic: high | Weather: rain</div>`)[0];
+                popup_8a36f7aa73fb4a5420b796291fb0f85f.setContent(html_0daf2705cb5c8d016004b85b22da4076);
+            
+        
+
+        circle_marker_0ea6e05e3f906d081a7c7a2f4a7ed57a.bindPopup(popup_8a36f7aa73fb4a5420b796291fb0f85f)
+        ;
+
+        
+    
+    
+            circle_marker_0ea6e05e3f906d081a7c7a2f4a7ed57a.bindTooltip(
+                `<div>
+                     Truck_1 | Stop #5 (Node 23)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_5dd418b965cb575c264832b562cf650b = L.circleMarker(
+                [28.489956, 77.12277],
+                {"bubblingMouseEvents": true, "color": "#2563EB", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#2563EB", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7, "stroke": true, "weight": 3}
+            ).addTo(map_90a36b18854e969b2ed81ef727b9a1f2);
+        
+    
+        var popup_c1948f098e35f896d0e2c24278e86445 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_b485928b7a46bc5d83e59002915e439c = $(`<div id="html_b485928b7a46bc5d83e59002915e439c" style="width: 100.0%; height: 100.0%;"><b>Truck_1 - Stop #6 (Node 1)</b><br>Road: resdntl (commercial)<br>Traffic: high | Weather: clear</div>`)[0];
+                popup_c1948f098e35f896d0e2c24278e86445.setContent(html_b485928b7a46bc5d83e59002915e439c);
+            
+        
+
+        circle_marker_5dd418b965cb575c264832b562cf650b.bindPopup(popup_c1948f098e35f896d0e2c24278e86445)
+        ;
+
+        
+    
+    
+            circle_marker_5dd418b965cb575c264832b562cf650b.bindTooltip(
+                `<div>
+                     Truck_1 | Stop #6 (Node 1)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_58e264ff5ad19e26a17ac842c60943ab = L.circleMarker(
+                [28.434342, 77.211798],
+                {"bubblingMouseEvents": true, "color": "#2563EB", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#2563EB", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7, "stroke": true, "weight": 3}
+            ).addTo(map_90a36b18854e969b2ed81ef727b9a1f2);
+        
+    
+        var popup_38c70618b62378ce22051cc270ba31a3 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_55735a94eb05b66b370456ebcf4a1eac = $(`<div id="html_55735a94eb05b66b370456ebcf4a1eac" style="width: 100.0%; height: 100.0%;"><b>Truck_1 - Stop #7 (Node 5)</b><br>Road: highway (industrial)<br>Traffic: medium | Weather: clear</div>`)[0];
+                popup_38c70618b62378ce22051cc270ba31a3.setContent(html_55735a94eb05b66b370456ebcf4a1eac);
+            
+        
+
+        circle_marker_58e264ff5ad19e26a17ac842c60943ab.bindPopup(popup_38c70618b62378ce22051cc270ba31a3)
+        ;
+
+        
+    
+    
+            circle_marker_58e264ff5ad19e26a17ac842c60943ab.bindTooltip(
+                `<div>
+                     Truck_1 | Stop #7 (Node 5)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_0d3a052d590e52991f812e70690000d9 = L.circleMarker(
+                [28.474566, 77.310117],
+                {"bubblingMouseEvents": true, "color": "#2563EB", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#2563EB", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7, "stroke": true, "weight": 3}
+            ).addTo(map_90a36b18854e969b2ed81ef727b9a1f2);
+        
+    
+        var popup_bec1fec6ef2d3229408480c836ef7c4e = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_5bf1a9ff2dcb7cbf8325f1b30ecc8e16 = $(`<div id="html_5bf1a9ff2dcb7cbf8325f1b30ecc8e16" style="width: 100.0%; height: 100.0%;"><b>Truck_1 - Stop #8 (Node 2)</b><br>Road: urban (residential)<br>Traffic: low | Weather: rain</div>`)[0];
+                popup_bec1fec6ef2d3229408480c836ef7c4e.setContent(html_5bf1a9ff2dcb7cbf8325f1b30ecc8e16);
+            
+        
+
+        circle_marker_0d3a052d590e52991f812e70690000d9.bindPopup(popup_bec1fec6ef2d3229408480c836ef7c4e)
+        ;
+
+        
+    
+    
+            circle_marker_0d3a052d590e52991f812e70690000d9.bindTooltip(
+                `<div>
+                     Truck_1 | Stop #8 (Node 2)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_de8e8f5a27500b92dd1ed2949d570a8b = L.circleMarker(
+                [28.533472, 77.323085],
+                {"bubblingMouseEvents": true, "color": "#2563EB", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#2563EB", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7, "stroke": true, "weight": 3}
+            ).addTo(map_90a36b18854e969b2ed81ef727b9a1f2);
+        
+    
+        var popup_e079395ae2c1dcf8dc5781754dde197f = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_b27774661b01386c372420bd09a83f81 = $(`<div id="html_b27774661b01386c372420bd09a83f81" style="width: 100.0%; height: 100.0%;"><b>Truck_1 - Stop #9 (Node 14)</b><br>Road: residental (residential)<br>Traffic: low | Weather: rain</div>`)[0];
+                popup_e079395ae2c1dcf8dc5781754dde197f.setContent(html_b27774661b01386c372420bd09a83f81);
+            
+        
+
+        circle_marker_de8e8f5a27500b92dd1ed2949d570a8b.bindPopup(popup_e079395ae2c1dcf8dc5781754dde197f)
+        ;
+
+        
+    
+    
+            circle_marker_de8e8f5a27500b92dd1ed2949d570a8b.bindTooltip(
+                `<div>
+                     Truck_1 | Stop #9 (Node 14)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_7bd86efb7d32972f7ba3190baa45d176 = L.circleMarker(
+                [28.713558, 77.23483],
+                {"bubblingMouseEvents": true, "color": "#2563EB", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#2563EB", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7, "stroke": true, "weight": 3}
+            ).addTo(map_90a36b18854e969b2ed81ef727b9a1f2);
+        
+    
+        var popup_431a986b2972c70d6f5566cf98013629 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_122c672222892e618b308f2796abbd52 = $(`<div id="html_122c672222892e618b308f2796abbd52" style="width: 100.0%; height: 100.0%;"><b>Truck_1 - Stop #10 (Node 24)</b><br>Road: residential (residential)<br>Traffic: medium | Weather: clear</div>`)[0];
+                popup_431a986b2972c70d6f5566cf98013629.setContent(html_122c672222892e618b308f2796abbd52);
+            
+        
+
+        circle_marker_7bd86efb7d32972f7ba3190baa45d176.bindPopup(popup_431a986b2972c70d6f5566cf98013629)
+        ;
+
+        
+    
+    
+            circle_marker_7bd86efb7d32972f7ba3190baa45d176.bindTooltip(
+                `<div>
+                     Truck_1 | Stop #10 (Node 24)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var poly_line_2043c9b37a00429638be244458a7adde = L.polyline(
+                [[28.876145, 77.116253], [28.809582, 77.135108], [28.636844, 77.108653], [28.500607, 77.038209], [28.449762, 77.115605], [28.476852, 77.102861], [28.489956, 77.12277], [28.434342, 77.211798], [28.474566, 77.310117], [28.533472, 77.323085], [28.713558, 77.23483], [28.876145, 77.116253]],
+                {"bubblingMouseEvents": true, "color": "#2563EB", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#2563EB", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.8, "smoothFactor": 1.0, "stroke": true, "weight": 4}
+            ).addTo(map_90a36b18854e969b2ed81ef727b9a1f2);
+        
+    
+            poly_line_2043c9b37a00429638be244458a7adde.bindTooltip(
+                `<div>
+                     Truck_1: 10 stops | 175.48 km | 412.5 min
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_67d9b93eafd4d6fcc91ff1a2fc012dc4 = L.circleMarker(
+                [28.875651, 77.103116],
+                {"bubblingMouseEvents": true, "color": "#16A34A", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#16A34A", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7, "stroke": true, "weight": 3}
+            ).addTo(map_90a36b18854e969b2ed81ef727b9a1f2);
+        
+    
+        var popup_e0f8f5f4b9c8aa75c23af4fb18b71947 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_e4f29e2fd48fc88cec84cbbb7e832f04 = $(`<div id="html_e4f29e2fd48fc88cec84cbbb7e832f04" style="width: 100.0%; height: 100.0%;"><b>Truck_2 - Stop #1 (Node 7)</b><br>Road: urban (industrial)<br>Traffic: medium | Weather: rain</div>`)[0];
+                popup_e0f8f5f4b9c8aa75c23af4fb18b71947.setContent(html_e4f29e2fd48fc88cec84cbbb7e832f04);
+            
+        
+
+        circle_marker_67d9b93eafd4d6fcc91ff1a2fc012dc4.bindPopup(popup_e0f8f5f4b9c8aa75c23af4fb18b71947)
+        ;
+
+        
+    
+    
+            circle_marker_67d9b93eafd4d6fcc91ff1a2fc012dc4.bindTooltip(
+                `<div>
+                     Truck_2 | Stop #1 (Node 7)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_fddfcc5bffb96e2945ad0c98907fa3de = L.circleMarker(
+                [28.787658, 77.199365],
+                {"bubblingMouseEvents": true, "color": "#16A34A", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#16A34A", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7, "stroke": true, "weight": 3}
+            ).addTo(map_90a36b18854e969b2ed81ef727b9a1f2);
+        
+    
+        var popup_d1866b63c50273f5268ca3113e698739 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_f1e485c216ff35240c31341da45735b1 = $(`<div id="html_f1e485c216ff35240c31341da45735b1" style="width: 100.0%; height: 100.0%;"><b>Truck_2 - Stop #2 (Node 25)</b><br>Road: resdntl (commercial)<br>Traffic: medium | Weather: rain</div>`)[0];
+                popup_d1866b63c50273f5268ca3113e698739.setContent(html_f1e485c216ff35240c31341da45735b1);
+            
+        
+
+        circle_marker_fddfcc5bffb96e2945ad0c98907fa3de.bindPopup(popup_d1866b63c50273f5268ca3113e698739)
+        ;
+
+        
+    
+    
+            circle_marker_fddfcc5bffb96e2945ad0c98907fa3de.bindTooltip(
+                `<div>
+                     Truck_2 | Stop #2 (Node 25)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_be7ae360fdd6dd2d0ff8479a547aa909 = L.circleMarker(
+                [28.6504, 77.27686],
+                {"bubblingMouseEvents": true, "color": "#16A34A", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#16A34A", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7, "stroke": true, "weight": 3}
+            ).addTo(map_90a36b18854e969b2ed81ef727b9a1f2);
+        
+    
+        var popup_0a5b39c942c836972dc4fce7a7c4fda2 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_6d3512f5d79f20607d7673c9b5d76824 = $(`<div id="html_6d3512f5d79f20607d7673c9b5d76824" style="width: 100.0%; height: 100.0%;"><b>Truck_2 - Stop #3 (Node 12)</b><br>Road: urban (commercial)<br>Traffic: medium | Weather: rain</div>`)[0];
+                popup_0a5b39c942c836972dc4fce7a7c4fda2.setContent(html_6d3512f5d79f20607d7673c9b5d76824);
+            
+        
+
+        circle_marker_be7ae360fdd6dd2d0ff8479a547aa909.bindPopup(popup_0a5b39c942c836972dc4fce7a7c4fda2)
+        ;
+
+        
+    
+    
+            circle_marker_be7ae360fdd6dd2d0ff8479a547aa909.bindTooltip(
+                `<div>
+                     Truck_2 | Stop #3 (Node 12)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_3b8cd19809563132e6e598fd3023b49d = L.circleMarker(
+                [28.700601, 77.334299],
+                {"bubblingMouseEvents": true, "color": "#16A34A", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#16A34A", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7, "stroke": true, "weight": 3}
+            ).addTo(map_90a36b18854e969b2ed81ef727b9a1f2);
+        
+    
+        var popup_9c3dc3a362b4496090e4c75adaeb5a52 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_8bb116bd1b8c7ad01914f5463a2d31c9 = $(`<div id="html_8bb116bd1b8c7ad01914f5463a2d31c9" style="width: 100.0%; height: 100.0%;"><b>Truck_2 - Stop #4 (Node 15)</b><br>Road: urban (industrial)<br>Traffic: low | Weather: rain</div>`)[0];
+                popup_9c3dc3a362b4496090e4c75adaeb5a52.setContent(html_8bb116bd1b8c7ad01914f5463a2d31c9);
+            
+        
+
+        circle_marker_3b8cd19809563132e6e598fd3023b49d.bindPopup(popup_9c3dc3a362b4496090e4c75adaeb5a52)
+        ;
+
+        
+    
+    
+            circle_marker_3b8cd19809563132e6e598fd3023b49d.bindTooltip(
+                `<div>
+                     Truck_2 | Stop #4 (Node 15)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_a40fc00529930604ec94bcbf4bd083fd = L.circleMarker(
+                [28.769991, 77.251313],
+                {"bubblingMouseEvents": true, "color": "#16A34A", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#16A34A", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7, "stroke": true, "weight": 3}
+            ).addTo(map_90a36b18854e969b2ed81ef727b9a1f2);
+        
+    
+        var popup_eb80fec55fbd513b1c287c80a49ba2c0 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_87789570242beccb54bf1ef6f9560bc9 = $(`<div id="html_87789570242beccb54bf1ef6f9560bc9" style="width: 100.0%; height: 100.0%;"><b>Truck_2 - Stop #5 (Node 13)</b><br>Road: urban (commercial)<br>Traffic: high | Weather: rain</div>`)[0];
+                popup_eb80fec55fbd513b1c287c80a49ba2c0.setContent(html_87789570242beccb54bf1ef6f9560bc9);
+            
+        
+
+        circle_marker_a40fc00529930604ec94bcbf4bd083fd.bindPopup(popup_eb80fec55fbd513b1c287c80a49ba2c0)
+        ;
+
+        
+    
+    
+            circle_marker_a40fc00529930604ec94bcbf4bd083fd.bindTooltip(
+                `<div>
+                     Truck_2 | Stop #5 (Node 13)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var poly_line_818697c364dfceafc147d2ab49171e68 = L.polyline(
+                [[28.876145, 77.116253], [28.875651, 77.103116], [28.787658, 77.199365], [28.6504, 77.27686], [28.700601, 77.334299], [28.769991, 77.251313], [28.876145, 77.116253]],
+                {"bubblingMouseEvents": true, "color": "#16A34A", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#16A34A", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.8, "smoothFactor": 1.0, "stroke": true, "weight": 4}
+            ).addTo(map_90a36b18854e969b2ed81ef727b9a1f2);
+        
+    
+            poly_line_818697c364dfceafc147d2ab49171e68.bindTooltip(
+                `<div>
+                     Truck_2: 5 stops | 92.65 km | 300.9 min
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_c0fe46359e8bca88e17386e5f6850f1a = L.circleMarker(
+                [28.783353, 77.01539],
+                {"bubblingMouseEvents": true, "color": "#DC2626", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#DC2626", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7, "stroke": true, "weight": 3}
+            ).addTo(map_90a36b18854e969b2ed81ef727b9a1f2);
+        
+    
+        var popup_0cb1825de2c29092cb8aa41db0ddac4b = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_c7ffedb612e5a1fe3aeed9fec51157ce = $(`<div id="html_c7ffedb612e5a1fe3aeed9fec51157ce" style="width: 100.0%; height: 100.0%;"><b>Truck_3 - Stop #1 (Node 18)</b><br>Road: urban (commercial)<br>Traffic: low | Weather: clear</div>`)[0];
+                popup_0cb1825de2c29092cb8aa41db0ddac4b.setContent(html_c7ffedb612e5a1fe3aeed9fec51157ce);
+            
+        
+
+        circle_marker_c0fe46359e8bca88e17386e5f6850f1a.bindPopup(popup_0cb1825de2c29092cb8aa41db0ddac4b)
+        ;
+
+        
+    
+    
+            circle_marker_c0fe46359e8bca88e17386e5f6850f1a.bindTooltip(
+                `<div>
+                     Truck_3 | Stop #1 (Node 18)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_e8f0cff965d1818568ade34677bc83d3 = L.circleMarker(
+                [28.757145, 76.863628],
+                {"bubblingMouseEvents": true, "color": "#DC2626", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#DC2626", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7, "stroke": true, "weight": 3}
+            ).addTo(map_90a36b18854e969b2ed81ef727b9a1f2);
+        
+    
+        var popup_66b598330704be171125bd2bdfcabff0 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_941a9f9d5d96c0e4024a0600df34dde6 = $(`<div id="html_941a9f9d5d96c0e4024a0600df34dde6" style="width: 100.0%; height: 100.0%;"><b>Truck_3 - Stop #2 (Node 22)</b><br>Road: residential (commercial)<br>Traffic: low | Weather: clear</div>`)[0];
+                popup_66b598330704be171125bd2bdfcabff0.setContent(html_941a9f9d5d96c0e4024a0600df34dde6);
+            
+        
+
+        circle_marker_e8f0cff965d1818568ade34677bc83d3.bindPopup(popup_66b598330704be171125bd2bdfcabff0)
+        ;
+
+        
+    
+    
+            circle_marker_e8f0cff965d1818568ade34677bc83d3.bindTooltip(
+                `<div>
+                     Truck_3 | Stop #2 (Node 22)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_cd6904660074431d1fd95e9a7243cc68 = L.circleMarker(
+                [28.614764, 76.927645],
+                {"bubblingMouseEvents": true, "color": "#DC2626", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#DC2626", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7, "stroke": true, "weight": 3}
+            ).addTo(map_90a36b18854e969b2ed81ef727b9a1f2);
+        
+    
+        var popup_865a33faa3d58f00a8ac11d7c1a327de = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_aff54763fe47db26adb776c9c56c9175 = $(`<div id="html_aff54763fe47db26adb776c9c56c9175" style="width: 100.0%; height: 100.0%;"><b>Truck_3 - Stop #3 (Node 6)</b><br>Road: urban (industrial)<br>Traffic: high | Weather: rain</div>`)[0];
+                popup_865a33faa3d58f00a8ac11d7c1a327de.setContent(html_aff54763fe47db26adb776c9c56c9175);
+            
+        
+
+        circle_marker_cd6904660074431d1fd95e9a7243cc68.bindPopup(popup_865a33faa3d58f00a8ac11d7c1a327de)
+        ;
+
+        
+    
+    
+            circle_marker_cd6904660074431d1fd95e9a7243cc68.bindTooltip(
+                `<div>
+                     Truck_3 | Stop #3 (Node 6)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_b677dea145991ce7abae23d840de4d52 = L.circleMarker(
+                [28.607573, 76.924463],
+                {"bubblingMouseEvents": true, "color": "#DC2626", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#DC2626", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7, "stroke": true, "weight": 3}
+            ).addTo(map_90a36b18854e969b2ed81ef727b9a1f2);
+        
+    
+        var popup_14a07ed995f986856c7ffa9b40274fdf = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_b6d3979b8263ce836f579530cf774185 = $(`<div id="html_b6d3979b8263ce836f579530cf774185" style="width: 100.0%; height: 100.0%;"><b>Truck_3 - Stop #4 (Node 8)</b><br>Road: resdntl (unknown)<br>Traffic: medium | Weather: rain</div>`)[0];
+                popup_14a07ed995f986856c7ffa9b40274fdf.setContent(html_b6d3979b8263ce836f579530cf774185);
+            
+        
+
+        circle_marker_b677dea145991ce7abae23d840de4d52.bindPopup(popup_14a07ed995f986856c7ffa9b40274fdf)
+        ;
+
+        
+    
+    
+            circle_marker_b677dea145991ce7abae23d840de4d52.bindTooltip(
+                `<div>
+                     Truck_3 | Stop #4 (Node 8)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_e0f9de044e9da45fcb61f57f5f6ce442 = L.circleMarker(
+                [28.57688, 76.996632],
+                {"bubblingMouseEvents": true, "color": "#DC2626", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#DC2626", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7, "stroke": true, "weight": 3}
+            ).addTo(map_90a36b18854e969b2ed81ef727b9a1f2);
+        
+    
+        var popup_967951fcf058fb48df2687317c56ecb4 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_ed37e576ded18cb8b8d0c3ebc0d0f53a = $(`<div id="html_ed37e576ded18cb8b8d0c3ebc0d0f53a" style="width: 100.0%; height: 100.0%;"><b>Truck_3 - Stop #5 (Node 17)</b><br>Road: residential (unknown)<br>Traffic: medium | Weather: clear</div>`)[0];
+                popup_967951fcf058fb48df2687317c56ecb4.setContent(html_ed37e576ded18cb8b8d0c3ebc0d0f53a);
+            
+        
+
+        circle_marker_e0f9de044e9da45fcb61f57f5f6ce442.bindPopup(popup_967951fcf058fb48df2687317c56ecb4)
+        ;
+
+        
+    
+    
+            circle_marker_e0f9de044e9da45fcb61f57f5f6ce442.bindTooltip(
+                `<div>
+                     Truck_3 | Stop #5 (Node 17)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_87006af47cff7d9be2c2ecbcf2c7bc55 = L.circleMarker(
+                [28.595144, 77.060019],
+                {"bubblingMouseEvents": true, "color": "#DC2626", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#DC2626", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7, "stroke": true, "weight": 3}
+            ).addTo(map_90a36b18854e969b2ed81ef727b9a1f2);
+        
+    
+        var popup_dfc0ced46aac9986789c2c97374182d3 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_45eb20781e8dd03643898e32f12bc008 = $(`<div id="html_45eb20781e8dd03643898e32f12bc008" style="width: 100.0%; height: 100.0%;"><b>Truck_3 - Stop #6 (Node 21)</b><br>Road: highway (industrial)<br>Traffic: medium | Weather: fog</div>`)[0];
+                popup_dfc0ced46aac9986789c2c97374182d3.setContent(html_45eb20781e8dd03643898e32f12bc008);
+            
+        
+
+        circle_marker_87006af47cff7d9be2c2ecbcf2c7bc55.bindPopup(popup_dfc0ced46aac9986789c2c97374182d3)
+        ;
+
+        
+    
+    
+            circle_marker_87006af47cff7d9be2c2ecbcf2c7bc55.bindTooltip(
+                `<div>
+                     Truck_3 | Stop #6 (Node 21)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_e232bdeea0fbd4df93ea7edc273382f7 = L.circleMarker(
+                [28.558491, 77.067811],
+                {"bubblingMouseEvents": true, "color": "#DC2626", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#DC2626", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7, "stroke": true, "weight": 3}
+            ).addTo(map_90a36b18854e969b2ed81ef727b9a1f2);
+        
+    
+        var popup_b0345776862cd3e346a9d85a91c8ee87 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_9ef261f442608032a4feeb385a61e73b = $(`<div id="html_9ef261f442608032a4feeb385a61e73b" style="width: 100.0%; height: 100.0%;"><b>Truck_3 - Stop #7 (Node 9)</b><br>Road: urban (commercial)<br>Traffic: medium | Weather: rain</div>`)[0];
+                popup_b0345776862cd3e346a9d85a91c8ee87.setContent(html_9ef261f442608032a4feeb385a61e73b);
+            
+        
+
+        circle_marker_e232bdeea0fbd4df93ea7edc273382f7.bindPopup(popup_b0345776862cd3e346a9d85a91c8ee87)
+        ;
+
+        
+    
+    
+            circle_marker_e232bdeea0fbd4df93ea7edc273382f7.bindTooltip(
+                `<div>
+                     Truck_3 | Stop #7 (Node 9)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_1de54a54e3395de37a2cb74b741499cf = L.circleMarker(
+                [28.583579, 77.082281],
+                {"bubblingMouseEvents": true, "color": "#DC2626", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#DC2626", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7, "stroke": true, "weight": 3}
+            ).addTo(map_90a36b18854e969b2ed81ef727b9a1f2);
+        
+    
+        var popup_ece16c02993172d16dcfd135183f3b1d = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_5ca04ee0bf116d08d9ed084c5b2a3cd7 = $(`<div id="html_5ca04ee0bf116d08d9ed084c5b2a3cd7" style="width: 100.0%; height: 100.0%;"><b>Truck_3 - Stop #8 (Node 3)</b><br>Road: highway (commercial)<br>Traffic: low | Weather: rain</div>`)[0];
+                popup_ece16c02993172d16dcfd135183f3b1d.setContent(html_5ca04ee0bf116d08d9ed084c5b2a3cd7);
+            
+        
+
+        circle_marker_1de54a54e3395de37a2cb74b741499cf.bindPopup(popup_ece16c02993172d16dcfd135183f3b1d)
+        ;
+
+        
+    
+    
+            circle_marker_1de54a54e3395de37a2cb74b741499cf.bindTooltip(
+                `<div>
+                     Truck_3 | Stop #8 (Node 3)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_ef766a82c304de513c49e487cb8866af = L.circleMarker(
+                [28.654582, 77.160426],
+                {"bubblingMouseEvents": true, "color": "#DC2626", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#DC2626", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7, "stroke": true, "weight": 3}
+            ).addTo(map_90a36b18854e969b2ed81ef727b9a1f2);
+        
+    
+        var popup_2e77a5a0074d74d1fec98737475f7f4a = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_83bf4e4e2245ca16b6bc4e2c7cfaa375 = $(`<div id="html_83bf4e4e2245ca16b6bc4e2c7cfaa375" style="width: 100.0%; height: 100.0%;"><b>Truck_3 - Stop #9 (Node 16)</b><br>Road: residental (unknown)<br>Traffic: medium | Weather: clear</div>`)[0];
+                popup_2e77a5a0074d74d1fec98737475f7f4a.setContent(html_83bf4e4e2245ca16b6bc4e2c7cfaa375);
+            
+        
+
+        circle_marker_ef766a82c304de513c49e487cb8866af.bindPopup(popup_2e77a5a0074d74d1fec98737475f7f4a)
+        ;
+
+        
+    
+    
+            circle_marker_ef766a82c304de513c49e487cb8866af.bindTooltip(
+                `<div>
+                     Truck_3 | Stop #9 (Node 16)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_97c1d635eed922d3bc90c826e602c675 = L.circleMarker(
+                [28.719033, 77.140437],
+                {"bubblingMouseEvents": true, "color": "#DC2626", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#DC2626", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7, "stroke": true, "weight": 3}
+            ).addTo(map_90a36b18854e969b2ed81ef727b9a1f2);
+        
+    
+        var popup_2bbdd7342d63ecb2ac69a8eff367dffb = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_e45130524d5b702d404cc2051c7ab51e = $(`<div id="html_e45130524d5b702d404cc2051c7ab51e" style="width: 100.0%; height: 100.0%;"><b>Truck_3 - Stop #10 (Node 11)</b><br>Road: residental (residential)<br>Traffic: high | Weather: rain</div>`)[0];
+                popup_2bbdd7342d63ecb2ac69a8eff367dffb.setContent(html_e45130524d5b702d404cc2051c7ab51e);
+            
+        
+
+        circle_marker_97c1d635eed922d3bc90c826e602c675.bindPopup(popup_2bbdd7342d63ecb2ac69a8eff367dffb)
+        ;
+
+        
+    
+    
+            circle_marker_97c1d635eed922d3bc90c826e602c675.bindTooltip(
+                `<div>
+                     Truck_3 | Stop #10 (Node 11)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var poly_line_dbc9ea6970555e82d4af76a86d953d1d = L.polyline(
+                [[28.876145, 77.116253], [28.783353, 77.01539], [28.757145, 76.863628], [28.614764, 76.927645], [28.607573, 76.924463], [28.57688, 76.996632], [28.595144, 77.060019], [28.558491, 77.067811], [28.583579, 77.082281], [28.654582, 77.160426], [28.719033, 77.140437], [28.876145, 77.116253]],
+                {"bubblingMouseEvents": true, "color": "#DC2626", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#DC2626", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.8, "smoothFactor": 1.0, "stroke": true, "weight": 4}
+            ).addTo(map_90a36b18854e969b2ed81ef727b9a1f2);
+        
+    
+            poly_line_dbc9ea6970555e82d4af76a86d953d1d.bindTooltip(
+                `<div>
+                     Truck_3: 10 stops | 141.55 km | 471.3 min
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+</script>
+</html>

@@ -18,6 +18,14 @@ Standard routing engines minimize raw physical distance, often sending delivery 
 
 ---
 
+## Visual Fleet Dispatch Map
+
+![Optimized Multi-Vehicle Delivery Routes](assets/route_map_preview.png)
+
+*Interactive Folium map (ssets/dispatch_routes_map.html) illustrating optimal multi-vehicle dispatch sequences across 25 customer drop-off locations across Delhi NCR from the central depot during peak evening traffic.*
+
+---
+
 ## Project Architecture & Workflow
 
 ```text
@@ -38,4 +46,5 @@ route-optimization-model/
 │   └── optimization_results.csv
 ├── requirements.txt
 └── README.md
+
 
