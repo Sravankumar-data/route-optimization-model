@@ -24,7 +24,7 @@ Standard routing engines minimize raw physical distance, often sending delivery 
 
 **[Click Here to Explore the Live Interactive Route Map](https://sravankumar-data.github.io/route-optimization-model/assets/dispatch_routes_map.html)** *(Hosted via GitHub Pages — zoom in and click any stop to inspect road type, traffic, and weather details)*
 
-*To view locally: open ssets/dispatch_routes_map.html in any web browser or run python src/06_visualize_routes.py.*
+*To view locally: open assets/dispatch_routes_map.html in any web browser or run python src/06_visualize_routes.py.*
 
 ---
 
