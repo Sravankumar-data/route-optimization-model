@@ -22,7 +22,9 @@ Standard routing engines minimize raw physical distance, often sending delivery 
 
 ![Optimized Multi-Vehicle Delivery Routes](assets/route_map_preview.png)
 
-*Interactive Folium map (ssets/dispatch_routes_map.html) illustrating optimal multi-vehicle dispatch sequences across 25 customer drop-off locations across Delhi NCR from the central depot during peak evening traffic.*
+**[Click Here to Explore the Live Interactive Route Map](https://sravankumar-data.github.io/route-optimization-model/assets/dispatch_routes_map.html)** *(Hosted via GitHub Pages — zoom in and click any stop to inspect road type, traffic, and weather details)*
+
+*To view locally: open ssets/dispatch_routes_map.html in any web browser or run python src/06_visualize_routes.py.*
 
 ---
 
@@ -46,5 +48,6 @@ route-optimization-model/
 │   └── optimization_results.csv
 ├── requirements.txt
 └── README.md
+
 
 
